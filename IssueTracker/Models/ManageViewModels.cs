@@ -18,6 +18,7 @@ namespace IssueTracker.Models
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
         public IList<AuthenticationDescription> OtherLogins { get; set; }
+
     }
 
     public class FactorViewModel
