@@ -30,14 +30,14 @@ namespace IssueTracker.Migrations
             //    );
             //
 
-            DodajRolu(context,"Sluzbenik");
+            DodajRolu(context, "Sluzbenik");
             DodajRolu(context, "Administrator");
 
             if (!context.Users.Any(u => u.UserName == "peki"))
             {
                 var store = new UserStore<Korisnik>(context);
                 var manager = new UserManager<Korisnik>(store);
-                var user = new Korisnik { UserName = "peki" };
+                var user = new Korisnik { UserName = "peki", Ime="Peki", Prezime="Stefanovic" };
 
                 manager.Create(user, "ChangeItAsap!");
                 manager.AddToRole(user.Id, "Administrator");
@@ -50,6 +50,18 @@ namespace IssueTracker.Migrations
                 new VrstaProblema { Naziv = "Sistemski" },
                 new VrstaProblema { Naziv = "Tehnicki" }
                 );
+
+            var peki = context.Users.Where(user => user.UserName == "peki").SingleOrDefault();
+            if (peki != null)
+            {
+                context.Problemi.AddOrUpdate(
+                    p => p.Naziv,
+                    new Problem { Naziv = "Problem 1", DatumKreiranja = DateTime.UtcNow, Opis = "Neki levi opis smorio sam se", VrstaProblemaID = 2, Status = Status.Otvoren, Kreirao = peki },
+                    new Problem { Naziv = "Problem Neki", DatumKreiranja = DateTime.UtcNow, Opis = "Neki levi opis smorio samNeki levi opis smorio sam se", VrstaProblemaID = 3, Status = Status.Trijaza, Kreirao = peki },
+                    new Problem { Naziv = "Problem smorina", DatumKreiranja = DateTime.UtcNow, Opis = "Neki levi opis smorio sam seNeki levi opis smorio sam", VrstaProblemaID = 4, Status = Status.Aktivan, Kreirao = peki },
+                    new Problem { Naziv = "Problem Milica", DatumKreiranja = DateTime.UtcNow, Opis = "Neki levi opis sNeki levi opis smorio samNeki levi opis smorio sammorio sam se", VrstaProblemaID = 1, Status = Status.Aktivan, Kreirao = peki }
+                    );
+            }
         }
 
         private static void DodajRolu(ApplicationDbContext context, string nazivRole)

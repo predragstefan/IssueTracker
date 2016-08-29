@@ -16,7 +16,7 @@ namespace IssueTracker.Models
 
         public string Opis { get; set; }
 
-        public DateTime DatumIzmene { get; set; }
+        public DateTime VremeAkcije { get; set; }
 
         public string Izmenio { get; set; }
 

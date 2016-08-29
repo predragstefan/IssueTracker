@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Kreirao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DatumIzmene)
+            @Html.DisplayNameFor(model => model.VremePoslednjeIzmene)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PoslednjiIzmenio)
@@ -45,13 +45,13 @@
             @Html.DisplayFor(modelItem => item.DatumKreiranja)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Kreirao.ToString())
+            @Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DatumIzmene)
+            @Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ToString())
+            @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

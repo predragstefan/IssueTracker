@@ -18,8 +18,8 @@ namespace IssueTracker.Models
 
         [Display(Name = "Datum Kreiranja")]
         public DateTime DatumKreiranja { get; set; }
-        [Display(Name = "Datum Izmene")]
-        public DateTime? DatumIzmene { get; set; }
+        [Display(Name = "Vreme poslednje Izmene")]
+        public DateTime? VremePoslednjeIzmene { get; set; }
         [InverseProperty("KreiraniProblemi")]
         public Korisnik Kreirao { get; set; }
         public string KreiraoId { get; set; }

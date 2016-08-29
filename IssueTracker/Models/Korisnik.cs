@@ -1,10 +1,10 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace IssueTracker.Models
 {
@@ -14,7 +14,15 @@ namespace IssueTracker.Models
         public string Ime { get; set; }
         public string Prezime { get; set; }
 
-        
+        [Display(Name ="Ime i prezime")]
+        public string ImePrezime
+        {
+            get
+            {
+                return string.Format("{0} {1}", Ime, Prezime);
+            }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Korisnik> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -32,26 +40,4 @@ namespace IssueTracker.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<Korisnik>
-    {
-        public DbSet<Problem> Problemi { get; set; }
-        //dodaj isto ovo kao gore za vrstu problema
-        public DbSet<VrstaProblema> VrsteProblema { get; set; }
-        //public DbSet<ProblemKorisnik> ProblemKorisniks { get; set; }
-        public DbSet<IstorijaProblema> IstorijeProblema { get; set; }
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-
-        public override int SaveChanges()
-        {
-            return base.SaveChanges();
-        }
-    }
 }

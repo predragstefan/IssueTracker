@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IssueTracker.Models;
+using Microsoft.AspNet.Identity;
 
 namespace IssueTracker.Controllers
 {
@@ -17,7 +18,7 @@ namespace IssueTracker.Controllers
         // GET: Problems
         public ActionResult Index()
         {
-            var problems = db.Problemi.Include(p => p.VrstaProblema);
+            var problems = db.Problemi.Include(p => p.VrstaProblema).Include(p=>p.Kreirao).Include(p=>p.PoslednjiIzmenio);
             return View(problems.ToList());
         }
 
@@ -48,7 +49,7 @@ namespace IssueTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Naziv,DatumIzmene,Opis,VrstaProblemaID")] Problem problem)
+        public ActionResult Create(Problem problem)
         {
             if (ModelState.IsValid)
             {
@@ -83,11 +84,31 @@ namespace IssueTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProblemID,Naziv,DatumKreiranja,DatumIzmene,DatumResavanja,VrstaProblemaID")] Problem problem)
+        public ActionResult Edit(Problem problem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(problem).State = EntityState.Modified;
+                var postojeciProblem = db.Problemi.Where(p => p.Id == problem.Id)
+                    .Include(p => p.VrstaProblema).SingleOrDefault();
+
+                IstorijaProblema istorijaProblema = new IstorijaProblema
+                {
+                    ProblemID = postojeciProblem.Id,
+                    VremeAkcije = DateTime.UtcNow,
+                    Izmenio = User.Identity.GetUserName(),
+                    Naziv = postojeciProblem.Naziv,
+                    Opis = postojeciProblem.Opis,
+                    Status = postojeciProblem.Status,
+                    VrstaProblema = postojeciProblem.VrstaProblema.Naziv
+                };
+
+                db.IstorijeProblema.Add(istorijaProblema);
+
+                postojeciProblem.VremePoslednjeIzmene = DateTime.UtcNow;
+                postojeciProblem.Naziv = problem.Naziv;
+                postojeciProblem.Opis = problem.Opis;
+                postojeciProblem.VrstaProblemaID = problem.VrstaProblemaID;
+                //db.Entry(problem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

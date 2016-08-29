@@ -15,14 +15,14 @@ namespace IssueTracker.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Designed by Pekara. All rights reserved.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Kontaktirajte me na mejl:";
 
             return View();
         }
