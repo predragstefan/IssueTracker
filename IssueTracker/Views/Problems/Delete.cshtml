@@ -36,19 +36,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DatumIzmene)
+            @Html.DisplayNameFor(model => model.Kreirao)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DatumIzmene)
+            @Html.DisplayFor(model => model.Kreirao)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DatumResavanja)
+            @Html.DisplayNameFor(model => model.VremePoslednjeIzmene)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DatumResavanja)
+            @Html.DisplayFor(model => model.VremePoslednjeIzmene)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoslednjiIzmenio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PoslednjiIzmenio)
         </dd>
 
     </dl>
@@ -57,7 +64,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default btn-danger" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

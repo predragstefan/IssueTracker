@@ -10,8 +10,8 @@ namespace IssueTracker.Models
     {
 
         public int VrstaProblemaID { get; set; }
-
         
+        [DisplayName("Vrsta problema")]
         public string Naziv { get; set; }
 
         public List<Problem> Problemi { get; set; }

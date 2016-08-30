@@ -4,21 +4,60 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2> Svi problemi</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@*<p>
+        @Html.ActionLink("Kreirajte Novi", "Create")
+    </p>*@
+
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid nav-index">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="">@*<a href="#">*@@Html.ActionLink("Kreirajte novi", "Create")@*</a>*@</li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+    @*<button type="button" class="btn btn-default">@Html.ActionLink("Kreirajte novi", "Create")</button>
+    <form class="navbar-form navbar-right margin-fix" role="search">
+        <div class="form-group">
+            
+            <input class="form-control" type="text" placeholder="Search">
+        </div>
+        <button class="btn btn-default" type="submit">Submit</button>
+    </form>*@
+
+
+<table class="table table-striped table-bordered table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.VrstaProblema.Naziv)
+            @Html.ActionLink("Vrsta problema", "Index", new { sortOrder = ViewBag.VrstaSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Naziv)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DatumKreiranja)
+            @Html.ActionLink("Datum kreiranja", "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Kreirao)
@@ -26,39 +65,50 @@
         <th>
             @Html.DisplayNameFor(model => model.VremePoslednjeIzmene)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.PoslednjiIzmenio)
         </th>
-        <th></th>
+        <th>
+            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm })
+        </th>
+        <th>
+            Akcije
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VrstaProblema.Naziv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Naziv)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.DatumKreiranja)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrstaProblema.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
 
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumKreiranja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                </div>
+            </td>
+        </tr>
+    }
 </table>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using IssueTracker.Models;
 using Microsoft.AspNet.Identity;
+using System.Web.UI.WebControls;
 
 namespace IssueTracker.Controllers
 {
@@ -16,10 +17,47 @@ namespace IssueTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Problems
-        public ActionResult Index()
+        //ORIGINAL 
+        //public ActionResult Index()
+        //{
+        //    var problems = db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio);
+        //    return View(problems.ToList());
+        //}
+
+        public ActionResult Index(string sortOrder)
         {
-            var problems = db.Problemi.Include(p => p.VrstaProblema).Include(p=>p.Kreirao).Include(p=>p.PoslednjiIzmenio);
-            return View(problems.ToList());
+
+            //ViewBag.VrstaSortParm = string.IsNullOrEmpty(sortOrder) ? "vrsta_desc" : "";
+            ViewBag.VrstaSortParm = sortOrder == "Vrsta" ? "vrsta_desc" : "Vrsta";
+            //ViewBag.VrstaSortParm = sortOrder == "vrsta_desc" ? "vrsta_asc" : "vrsta_desc";
+            ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var problemi = from p in db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio) select p;
+            switch (sortOrder)
+            {
+                case "Vrsta":
+                    problemi = problemi.OrderBy(p => p.VrstaProblema.Naziv);
+                    break;
+                case "vrsta_desc":
+                    problemi = problemi.OrderByDescending(p => p.VrstaProblema.Naziv);
+                    break;
+                case "Date":
+                    problemi = problemi.OrderBy(p => p.DatumKreiranja);
+                    break;
+                case "date_desc":
+                    problemi = problemi.OrderByDescending(p => p.DatumKreiranja);
+                    break;
+                case "Status":
+                    problemi = problemi.OrderBy(p => p.Status);
+                    break;
+                case "status_desc":
+                    problemi = problemi.OrderByDescending(p => p.Status);
+                    break;
+                default:
+                    break;
+            }
+
+            return View(problemi.ToList());
         }
 
         // GET: Problems/Details/5
@@ -29,7 +67,8 @@ namespace IssueTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Problem problem = db.Problemi.Find(id);
+            Problem problem = db.Problemi.Where(p => p.Id == id.Value).Include(p => p.VrstaProblema).SingleOrDefault();
+            
             if (problem == null)
             {
                 return HttpNotFound();
@@ -54,6 +93,7 @@ namespace IssueTracker.Controllers
             if (ModelState.IsValid)
             {
                 problem.DatumKreiranja = DateTime.UtcNow;
+                problem.Status = Status.Otvoren;
                 db.Problemi.Add(problem);
                 db.SaveChanges();
                 return RedirectToAction("Index");

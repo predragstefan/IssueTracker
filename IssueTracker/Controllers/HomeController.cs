@@ -26,5 +26,6 @@ namespace IssueTracker.Controllers
 
             return View();
         }
+
     }
 }

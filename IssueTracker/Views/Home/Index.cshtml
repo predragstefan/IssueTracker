@@ -3,29 +3,86 @@
 }
 
 <div class="jumbotron">
-    <h1>Dobrodošli</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+
+    <h1>Dobrodošli, </h1>
+
+    <p>
+        Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
+        Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu.
+    </p>
+    <br />
     <p><a href="http://asp.net" class="btn btn-primary btn-group-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4 container">
-        <h2>Getting started</h2>
+@*<div class="col-md-4 container">
+        <h2>Kako koristiti ovu aplikaciju?</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites
+            that enables a clean separation of concerns and that gives you full control over
+            markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast,
+            TDD-friendly development for creating sophisticated applications that use the latest web standards.
         </p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>*@
+
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="https://hd.unsplash.com/photo-1461749280684-dccba630e2f6" alt="...">
+            <div class="caption">
+                <h3>Kako koristiti ovu aplikaciju?</h3>
+                <p>
+                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites
+                    that enables a clean separation of concerns and that gives you full control over
+                    markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast,
+                    TDD-friendly development for creating sophisticated applications that use the latest web standards.
+                </p>
+                <p><a href="#" class="btn btn-primary" role="button">Više &raquo;</a></p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="https://hd.unsplash.com/photo-1470311500468-0179201f7499" alt="...">
+            <div class="caption">
+                <h3>Najnovija vest</h3>
+                <p>
+                    Kroz mašinsko učenje, Facebook može da uči algoritme kognitivnim
+                    zadacima koji su svojstveni ljudima. Dakle, ako algoritmu pokažete
+                    dovoljno slika na kojima je ovca, posle izvesnog vremena,
+                    on će početi i samostalno da ih prepoznaje.
+                </p>
+                <p><a href="#" class="btn btn-primary" role="button">Više &raquo;</a></p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="https://hd.unsplash.com/photo-1434493789847-2f02dc6ca35d" alt="...">
+            <div class="caption">
+                <h3>Najnovija vest</h3>
+                <p>
+                    Pellentesque semper euismod mauris id auctor.
+                    Etiam scelerisque egestas ipsum, vel pulvinar velit suscipit in.
+                    Nulla placerat nunc ut nulla tristique, sit amet molestie metus finibus.
+                    Pellentesque quam dolor, rutrum ac facilisis quis, tristique at ipsum.
+                    Suspendisse in erat urna. Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus.
+                </p>
+                <p><a href="#" class="btn btn-primary" role="button">Više &raquo;</a></p>
+            </div>
+        </div>
     </div>
 </div>
+
+@*<div class="col-md-4">
+        <h2>Najnovija vest!</h2>
+        <div class="media-object col-md-3"><img src="https://hd.unsplash.com/photo-1461749280684-dccba630e2f6" alt="Nema fotke" /></div>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>*@
+@*<div class="col-md-4">
+        <h2>Članak 2</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>*@
