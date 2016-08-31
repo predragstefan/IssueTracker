@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IssueTracker.Models;
 using Microsoft.AspNet.Identity;
 using System.Web.UI.WebControls;
+using PagedList;
 
 namespace IssueTracker.Controllers
 {
@@ -24,15 +25,33 @@ namespace IssueTracker.Controllers
         //    return View(problems.ToList());
         //}
 
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-
-            //ViewBag.VrstaSortParm = string.IsNullOrEmpty(sortOrder) ? "vrsta_desc" : "";
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.VrstaSortParm = sortOrder == "Vrsta" ? "vrsta_desc" : "Vrsta";
-            //ViewBag.VrstaSortParm = sortOrder == "vrsta_desc" ? "vrsta_asc" : "vrsta_desc";
             ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var problemi = from p in db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio) select p;
+
+            if (searchString!=null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var problemi = from p in db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio)
+                           select p;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                problemi = problemi.Where(p => p.Naziv.Contains(searchString)
+                                        || p.VrstaProblema.Naziv.Contains(searchString)
+                                        || p.Status.ToString().Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "Vrsta":
@@ -54,10 +73,14 @@ namespace IssueTracker.Controllers
                     problemi = problemi.OrderByDescending(p => p.Status);
                     break;
                 default:
+                    problemi = problemi.OrderBy(p => p.Id);
                     break;
             }
 
-            return View(problemi.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(problemi.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Problems/Details/5

@@ -4,66 +4,40 @@
     ViewBag.Title = "Detalji";
 }
 
-<h2>Details</h2>
-
 <h2 class="">Problem ID: @Html.DisplayFor(model => model.Id)</h2>
 <hr />
-
-@*<dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.VrstaProblema.Naziv)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.VrstaProblema.Naziv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DatumKreiranja)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DatumKreiranja)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VremePoslednjeIzmene)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VremePoslednjeIzmene)
-        </dd>
-    </dl>*@
-
 <div>
 
-    <div class="nav nav-justified">
-        @*<div class="nav-divider"></div>*@
+    @*<div class="nav nav-justified">
+        <div class="nav-divider"></div>
         @Html.DisplayFor(model => model.Naziv)
         <div class="btn-group pull-right" role="group" aria-label="...">
-
-            <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button >
+            <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
             <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
         </div>
-    </div>
-
+    </div>*@
+    
+    <nav class="navbar navbar-default">
+        <div class="container-fluid nav-index">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    @Html.DisplayFor(model => model.Naziv)
+                <form class="navbar-form navbar-right btn-group">
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
+                </form>
+            </div>
+        </div>
+        </nav>
     <div class="well">
         <br />
         <div class="row">
@@ -112,22 +86,18 @@
                 </div>
             </div>
         </div>
-        
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading panel-header-text">
-                        @Html.DisplayNameFor(model => model.Opis):
-                    </div>
-                    <div class="panel-body">
-                        @Html.DisplayFor(model => model.Opis)
-                    </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-header-text">
+                    @Html.DisplayNameFor(model => model.Opis):
+                </div>
+                <div class="panel-body">
+                    @Html.DisplayFor(model => model.Opis)
                 </div>
             </div>
-        
-            
+        </div>
     </div>
 </div>
-
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

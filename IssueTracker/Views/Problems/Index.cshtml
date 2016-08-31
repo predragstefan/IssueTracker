@@ -1,10 +1,11 @@
-﻿@model IEnumerable<IssueTracker.Models.Problem>
-
+﻿@model PagedList.IPagedList<IssueTracker.Models.Problem>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
 
-<h2> Svi problemi</h2>
+<h2>Svi problemi</h2>
 
 @*<p>
         @Html.ActionLink("Kreirajte Novi", "Create")
@@ -29,10 +30,19 @@
                 <li class="">@*<a href="#">*@@Html.ActionLink("Kreirajte novi", "Create")@*</a>*@</li>
             </ul>
             <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                @*<div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>*@
+                @using (Html.BeginForm("Index", "Problems", FormMethod.Get))
+                {
+                    
+                        <div class="form-group">
+                           @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                        </div>
+                        <button type="submit" value="Search" class="btn btn-default">Pretraži</button>
+                    
+                }
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -51,26 +61,26 @@
 <table class="table table-striped table-bordered table-hover">
     <tr>
         <th>
-            @Html.ActionLink("Vrsta problema", "Index", new { sortOrder = ViewBag.VrstaSortParm })
+            @Html.ActionLink("Vrsta problema", "Index", new { sortOrder = ViewBag.VrstaSortParm, currentFilter=ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Naziv)
+            @Html.DisplayNameFor(model => model.First().Naziv)
         </th>
         <th>
-            @Html.ActionLink("Datum kreiranja", "Index", new { sortOrder = ViewBag.DateSortParm })
+            @Html.ActionLink("Datum kreiranja", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Kreirao)
+            @Html.DisplayNameFor(model => model.First().Kreirao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VremePoslednjeIzmene)
+            @Html.DisplayNameFor(model => model.First().VremePoslednjeIzmene)
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.PoslednjiIzmenio)
+            @Html.DisplayNameFor(model => model.First().PoslednjiIzmenio)
         </th>
         <th>
-            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm })
+            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Akcije
@@ -81,34 +91,54 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.VrstaProblema.Naziv)
+                <p>@Html.DisplayFor(modelItem => item.VrstaProblema.Naziv)</p>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
+                <p>@Html.DisplayFor(modelItem => item.Naziv)</p>
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.DatumKreiranja)
-            </td>
+                <p>
+                    @Html.DisplayFor(modelItem => item.DatumKreiranja)
+                </p>            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)
-            </td>
+                <p>
+                    @Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)
+                </p>            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)
-            </td>
+                <p>
+                    @Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)
+                </p>            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)
-            </td>
+                <p>
+                    @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)
+                </p>            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+                <p>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </p>            </td>
             <td>
                 <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
                     <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
                     <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                </div>
+                    </div>
+                @*<ul class="nav navbar-nav btn-group">
+                    <li class="alert-warning">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                    <li class="alert-success">@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+                    <li class="alert-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                </ul>*@
+
             </td>
         </tr>
     }
+
+    
+    
 </table>
+<br />
+
+Strana @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, @class = "btn-group" }))
