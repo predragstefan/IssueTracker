@@ -222,6 +222,14 @@
     <Compile Include="Migrations\201608281746465_DatumIVremeIzmenePromena.Designer.cs">
       <DependentUpon>201608281746465_DatumIVremeIzmenePromena.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609051859112_dodataFotografija_AssignedTo_TipAkcije.cs" />
+    <Compile Include="Migrations\201609051859112_dodataFotografija_AssignedTo_TipAkcije.Designer.cs">
+      <DependentUpon>201609051859112_dodataFotografija_AssignedTo_TipAkcije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609052315476_dodatStringSlike.cs" />
+    <Compile Include="Migrations\201609052315476_dodatStringSlike.Designer.cs">
+      <DependentUpon>201609052315476_dodatStringSlike.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -260,6 +268,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -306,6 +315,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="imgs\" />
+    <Folder Include="ProfilneSlike\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -324,6 +334,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608281746465_DatumIVremeIzmenePromena.resx">
       <DependentUpon>201608281746465_DatumIVremeIzmenePromena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609051859112_dodataFotografija_AssignedTo_TipAkcije.resx">
+      <DependentUpon>201609051859112_dodataFotografija_AssignedTo_TipAkcije.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609052315476_dodatStringSlike.resx">
+      <DependentUpon>201609052315476_dodatStringSlike.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

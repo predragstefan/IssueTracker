@@ -13,6 +13,8 @@ using PagedList;
 
 namespace IssueTracker.Controllers
 {
+    
+    [Authorize(Roles ="Sluzbenik, Administrator")]
     public class ProblemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -90,7 +92,7 @@ namespace IssueTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Problem problem = db.Problemi.Where(p => p.Id == id.Value).Include(p => p.VrstaProblema).SingleOrDefault();
+            Problem problem = db.Problemi.Where(p => p.Id == id.Value).Include(p => p.VrstaProblema).Include(p=>p.Kreirao).Include(p=>p.PoslednjiIzmenio).SingleOrDefault();
             
             if (problem == null)
             {
@@ -117,6 +119,8 @@ namespace IssueTracker.Controllers
             {
                 problem.DatumKreiranja = DateTime.UtcNow;
                 problem.Status = Status.Otvoren;
+                var userID = User.Identity.GetUserId();
+                problem.KreiraoId = userID;
                 db.Problemi.Add(problem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -170,7 +174,10 @@ namespace IssueTracker.Controllers
                 postojeciProblem.VremePoslednjeIzmene = DateTime.UtcNow;
                 postojeciProblem.Naziv = problem.Naziv;
                 postojeciProblem.Opis = problem.Opis;
+                postojeciProblem.Status = problem.Status;
                 postojeciProblem.VrstaProblemaID = problem.VrstaProblemaID;
+                var userID = User.Identity.GetUserId();
+                postojeciProblem.PoslednjiIzmenioId = userID;
                 //db.Entry(problem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

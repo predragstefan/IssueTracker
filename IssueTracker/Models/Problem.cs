@@ -30,7 +30,11 @@ namespace IssueTracker.Models
         [Display(Name = "Vrsta Problema")]
         public VrstaProblema VrstaProblema { get; set; }
         public int VrstaProblemaID { get; set; }
-        
+
+
+        public Korisnik DodeljenoKorisniku { get; set; }
+        public string DodeljenoKorisnikuId { get; set; }
+
     }
 
     public enum Status { Otvoren, Trijaza, Aktivan, Suspendovan, Neaktivan, Zavrsen}

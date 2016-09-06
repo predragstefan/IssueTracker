@@ -23,5 +23,10 @@ namespace IssueTracker.Models
         public string VrstaProblema { get; set; }
 
         public Status Status { get; set; }
+
+        public TipAkcije Akcija { get; set; }
+
     }
+
+    public enum TipAkcije { Edit, Delete}
 }

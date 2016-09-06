@@ -2,34 +2,22 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="loadingscreen"> <div class="loader"></div> </div>
 <div class="jumbotron">
-
-    <h1>Dobrodošli, </h1>
-
+    <h1>Dobrodošli, @User.Identity.Name.ToString()</h1>
     <p>
         Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
         Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu.
     </p>
+    
     <br />
-    <p><a href="http://asp.net" class="btn btn-primary btn-group-lg">Learn more &raquo;</a></p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-group-lg">Današnji zadaci &raquo;</a></p>
 </div>
-
-@*<div class="col-md-4 container">
-        <h2>Kako koristiti ovu aplikaciju?</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites
-            that enables a clean separation of concerns and that gives you full control over
-            markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast,
-            TDD-friendly development for creating sophisticated applications that use the latest web standards.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>*@
-
 <div class="row">
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="~/imgs/photo-1461749280684-dccba630e2f6.jpg" alt="...">
-            <hr />
+            
             <div class="caption">
                 <h3>Kako koristiti ovu aplikaciju?</h3>
                 <p>
@@ -38,14 +26,14 @@
                     markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast,
                     TDD-friendly development for creating sophisticated applications that use the latest web standards.
                 </p>
-                <p><a href="#" class="btn btn-primary" role="button">Više &raquo;</a></p>
+                <a href="#" class="btn btn-default" role="button">Više &raquo;</a>
             </div>
         </div>
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="~/imgs/photo-1470311500468-0179201f7499.jpg" alt="...">
-            <hr />
+            
             <div class="caption">
                 <h3>Najnovija vest</h3>
                 <p>
@@ -54,14 +42,14 @@
                     dovoljno slika na kojima je ovca, posle izvesnog vremena,
                     on će početi i samostalno da ih prepoznaje.
                 </p>
-                <p><a href="#" class="btn btn-primary" role="button">Više &raquo;</a></p>
+                <a href="#" class="btn btn-default" role="button">Više &raquo;</a>
             </div>
         </div>
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="~/imgs/photo-1434493789847-2f02dc6ca35d.jpg" alt="...">
-            <hr />
+            
             <div class="caption">
                 <h3>Najnovija vest</h3>
                 <p>
@@ -72,7 +60,7 @@
                     Suspendisse in erat urna. Cum sociis natoque penatibus et magnis dis parturient montes,
                     nascetur ridiculus mus.
                 </p>
-                <p><a href="#" class="btn btn-primary" role="button">Više &raquo;</a></p>
+                <a href="#" class="btn btn-default" role="button">Više &raquo;</a>
             </div>
         </div>
     </div>

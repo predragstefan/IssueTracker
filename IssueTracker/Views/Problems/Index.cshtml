@@ -1,21 +1,16 @@
 ﻿@model PagedList.IPagedList<IssueTracker.Models.Problem>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
-
+<div class="loadingscreen"> <div class="loader"></div> </div>
+<br />
+<br />
 <h2>Svi problemi</h2>
 
-@*<p>
-        @Html.ActionLink("Kreirajte Novi", "Create")
-    </p>*@
-
-
-
 <nav class="navbar navbar-default">
-    <div class="container-fluid nav-index">
-        <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -24,121 +19,83 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="">@*<a href="#">*@@Html.ActionLink("Kreirajte novi", "Create")@*</a>*@</li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                @*<div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+        <div class="nav navbar-default navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-form navbar-left">
+                <div class="nav navbar-nav">
+                    @*<li>
+                        <button class="btn btn-default">@Html.ActionLink("Kreirajte novi", "Create")</button> 
+                </li>*@
+                    @using (Html.BeginForm("Create", "Problems", FormMethod.Get))
+                    {
+                        <button type="submit" class="btn btn-default">Kreiraj</button>
+                    }
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>*@
+            </div>
+            <form class="navbar-form navbar-right">
+
                 @using (Html.BeginForm("Index", "Problems", FormMethod.Get))
                 {
-                    
-                        <div class="form-group">
-                           @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
-                        </div>
-                        <button type="submit" value="Search" class="btn btn-default">Pretraži</button>
-                    
+                    <div class="form-group">
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control input-search", placeholder = "Unesite vrstu, naziv ili status..." })
+                    </div>
+                    <button type="submit" value="Search" class="btn btn-default">Pretraži</button>
                 }
             </form>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
-    @*<button type="button" class="btn btn-default">@Html.ActionLink("Kreirajte novi", "Create")</button>
-    <form class="navbar-form navbar-right margin-fix" role="search">
-        <div class="form-group">
-            
-            <input class="form-control" type="text" placeholder="Search">
         </div>
-        <button class="btn btn-default" type="submit">Submit</button>
-    </form>*@
-
-
-<table class="table table-striped table-bordered table-hover">
-    <tr>
-        <th>
-            @Html.ActionLink("Vrsta problema", "Index", new { sortOrder = ViewBag.VrstaSortParm, currentFilter=ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Naziv)
-        </th>
-        <th>
-            @Html.ActionLink("Datum kreiranja", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Kreirao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().VremePoslednjeIzmene)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.First().PoslednjiIzmenio)
-        </th>
-        <th>
-            @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            Akcije
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    </div>
+</nav>
+    <table class="table table-striped table-bordered table-hover table-curved table-responsive table-condensed" id="index-tabela">
         <tr>
-            <td>
-                <p>@Html.DisplayFor(modelItem => item.VrstaProblema.Naziv)</p>
-            </td>
-            <td>
-                <p>@Html.DisplayFor(modelItem => item.Naziv)</p>
-            </td>
+            <th class="vrsta">
+                @Html.ActionLink("Vrsta problema", "Index", new { sortOrder = ViewBag.VrstaSortParm, currentFilter = ViewBag.CurrentFilter }) <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </th>
+            <th class="naziv">
+                @Html.DisplayNameFor(model => model.First().Naziv)
+            </th>
+            <th class="datum-kreiranja">
+                @Html.ActionLink("Datum kreiranja", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter }) <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Kreirao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().VremePoslednjeIzmene)
+            </th>
 
-            <td>
-                <p>
-                    @Html.DisplayFor(modelItem => item.DatumKreiranja)
-                </p>            </td>
-            <td>
-                <p>
-                    @Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)
-                </p>            </td>
-            <td>
-                <p>
-                    @Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)
-                </p>            </td>
-            <td>
-                <p>
-                    @Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)
-                </p>            </td>
-            <td>
-                <p>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </p>            </td>
-            <td>
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
-                    <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
-                    <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                    </div>
-                @*<ul class="nav navbar-nav btn-group">
-                    <li class="alert-warning">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
-                    <li class="alert-success">@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
-                    <li class="alert-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
-                </ul>*@
-
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.First().PoslednjiIzmenio)
+            </th>
+            <th class="status-sort">
+                @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter }) <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            </th>
+            <th>
+                Akcije
+            </th>
         </tr>
-    }
 
-    
-    
-</table>
-<br />
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.VrstaProblema.Naziv)</td>
+                <td>@Html.DisplayFor(modelItem => item.Naziv)</td>
+                <td>@Html.DisplayFor(modelItem => item.DatumKreiranja)</td>
+                <td>@Html.DisplayFor(modelItem => item.Kreirao.ImePrezime)</td>
+                <td>@Html.DisplayFor(modelItem => item.VremePoslednjeIzmene)</td>
+                <td>@Html.DisplayFor(modelItem => item.PoslednjiIzmenio.ImePrezime)</td>
+                <td><div class="status">@Html.DisplayFor(modelItem => item.Status)</div></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+<hr />
+<div class="row paginacija">
+    Strana @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
 
-Strana @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, @class = "btn-group" }))
+    @Html.PagedListPager(Model, page => Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

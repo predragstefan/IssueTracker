@@ -1,22 +1,41 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    
 }
 
-/* Set padding to keep content from hitting the edges */
+h1 {
+    font-weight: 700;
+}
+
+h2 {
+    font-weight:300;
+}
+
+h3 {
+    font-weight:400;
+}
+h4 {
+    font-weight:400;
+}
+ /*Set padding to keep content from hitting the edges*/ 
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: white;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+
+ /*Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column*/ 
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+ /*Set width on the form input elements since they're 100% wide by default*/ 
 input,
 select,
 textarea {
@@ -41,8 +60,13 @@ footer {
     color: palevioletred;
 }
 
-td {
+.table tbody tr td {
     text-align:center;
+    vertical-align:middle;
+}
+
+.vrsta {
+    max-width: 120px;
 }
 
 td p {
@@ -55,14 +79,24 @@ th {
 nav ul li:hover {
     
     color: snow;
-    background-color: lightgrey;
+    /*background-color: rgba(112,128,144,0.7);*/
+    background-color:#80cbc4;
+    /*background-color: #d5e1ed;*/
         -webkit-transition: background-color 300ms linear;
         -moz-transition: background-color 300ms linear;
         -o-transition: background-color 300ms linear;
         -ms-transition: background-color 300ms linear;
         transition: background-color 300ms linear;
+
+        -webkit-box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.20);
+-moz-box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.20);
+box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.20);
+        
 }
 
+.navbar.navbar-default {
+    border-radius: 0px;
+}
 nav ul li {
     height:53px;
 }
@@ -71,3 +105,233 @@ nav ul li ul li {
     height:auto;
 }
 
+#border {
+    margin-left: -15px;
+}
+
+.thumbnail {
+    overflow: hidden;
+}
+
+.thumbnail p {
+    
+}
+
+.table.table-striped tbody tr td div.otvoren {
+    background-color: #b7bfc8;
+    font-size:13px;
+    color:snow;
+    font-weight:600;
+}
+
+.table.table-striped tbody tr td div.aktivan {
+    background-color: salmon;
+    /*background-color: #fcbcb5;*/
+    font-size:13px;
+    color:snow;
+    font-weight:600;
+}
+
+.table.table-striped tbody tr td div.zavrsen {
+    background-color: lightgreen;
+    	/*background-color:  #d3f8d3;*/
+    font-size:13px;
+    color:snow;
+    font-weight:600;
+}
+
+.table.table-striped tbody tr td div.suspendovan {
+    background-color: orange;
+    /*background-color: #ffd280;*/
+    font-size:13px;
+    color:snow;
+    font-weight:600;
+}
+
+.table.table-striped tbody tr td div.trijaza {
+    background-color: skyblue;
+    /*background-color: #d3edf8;*/
+    font-size:13px;
+    color:snow;
+    font-weight:600;
+}
+
+.table.table-striped tbody tr td div.neaktivan {
+    background-color: orangered;
+    /*background-color: #ff7c4d;*/
+    font-size:13px;
+    color:snow;
+    font-weight:600;
+}
+
+.status {
+    display: inline-block;
+  /*padding: 6px 12px;*/
+      padding: 4px 8px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+
+          color: #1a1a1a;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+.table tbody tr td.levo {
+    text-align:left;
+    width: 120px;
+    
+}
+
+.paginacija {
+    text-align: center;
+}
+
+.table-striped th {
+    background-color: #d5e1ed;
+}
+
+
+.input-search {
+    width: 230px;
+    margin-right: -4px;
+}
+
+
+dropdown-menu ul {
+    padding: 0px;
+}
+
+
+
+/*LOADING SCREEN STUFF*/
+.loadingscreen {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index:1050;
+    top: 0;
+    left: 0;
+}
+
+
+.loader {
+  color: slategrey;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease;
+  animation: load6 1.7s infinite ease;
+  top: 40%;
+  transform: translateY(-50%); 
+}
+@-webkit-keyframes load6 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-moz-keyframes load6 {
+  0% {
+      
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@keyframes load6 {
+  0% {
+      
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+/***********************************************KRAJ LOADERA********************************************************/
+
+
+footer {
+    height: 100%;
+    background-color: #ffffff;
+}

@@ -3,10 +3,12 @@
   padding-left: 0;
   margin: 20px 0;
   border-radius: 4px;
+  
 }
 
 .pagination > li {
   display: inline;
+  font-size: 20px;
 }
 
 .pagination > li > a,
@@ -51,7 +53,9 @@
   color: #ffffff;
   cursor: default;
   background-color: #428bca;
+  
   border-color: #428bca;
+  
 }
 
 .pagination > .disabled > span,
@@ -145,6 +149,7 @@
   text-decoration: none;
   background-color: #eeeeee;
 }
+
 
 .pager .next > a,
 .pager .next > span {

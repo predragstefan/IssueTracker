@@ -9,6 +9,30 @@
 <div>
     <h4>Change your account settings</h4>
     <hr />
+    @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <fieldset>
+            <legend>Photo</legend>
+            <div class="editor-label">
+                <label for="profile">FileName:</label>
+            </div>
+            <div class="editor-field">
+                <input name="UploadedImage" id="UploadedImage" type="file" accept="image/*" />
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control", placeholder = Model.Ime } })
+                
+            </div>
+        </div>
     <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
@@ -84,4 +108,5 @@
                 }*@
         </dd>
     </dl>
+    }
 </div>

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IssueTracker.Models;
+using System.IO;
 
 namespace IssueTracker.Controllers
 {
@@ -63,9 +64,15 @@ namespace IssueTracker.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+
+
             var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
             var model = new IndexViewModel
             {
+                Id = userId,
+                Ime = user.Ime,
+                Prezime = user.Prezime,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -73,6 +80,38 @@ namespace IssueTracker.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(IndexViewModel profileViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Korisnik trenutnoUlogovaniKorisnik = UserManager.FindById(profileViewModel.Id);
+                trenutnoUlogovaniKorisnik.Ime = profileViewModel.Ime;
+                trenutnoUlogovaniKorisnik.Prezime = profileViewModel.Prezime;
+                var result = await UserManager.UpdateAsync(trenutnoUlogovaniKorisnik);
+                if (profileViewModel.UploadedImage != null)
+                {
+                    string extension = Path.GetExtension(profileViewModel.UploadedImage.FileName);
+                    var putanjaFoldera = Server.MapPath(@"~\ProfilneSlike");
+
+                    profileViewModel.UploadedImage.SaveAs(Path.Combine(putanjaFoldera, profileViewModel.Id + extension));
+                    trenutnoUlogovaniKorisnik.Fotografija = Path.Combine(putanjaFoldera, profileViewModel.Id + extension);
+                }
+                var result2 = await UserManager.UpdateAsync(trenutnoUlogovaniKorisnik);
+                if (result2.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(profileViewModel);
+        }
+
+        public JsonResult VratiJson()
+        {
+            return Json(new { Ime = "Milica", Prezime = "Stef" }, JsonRequestBehavior.AllowGet);
         }
 
         //
