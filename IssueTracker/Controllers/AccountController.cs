@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IssueTracker.Models;
 
+
 namespace IssueTracker.Controllers
 {
     [Authorize]
@@ -20,6 +21,7 @@ namespace IssueTracker.Controllers
 
         public AccountController()
         {
+            
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -51,6 +53,7 @@ namespace IssueTracker.Controllers
                 _userManager = value;
             }
         }
+
 
         //
         // GET: /Account/Login

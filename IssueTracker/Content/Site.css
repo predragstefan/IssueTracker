@@ -1,4 +1,6 @@
-﻿body {
+﻿
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Open Sans', sans-serif;
@@ -37,9 +39,18 @@ h4 {
 
  /*Set width on the form input elements since they're 100% wide by default*/ 
 input,
-select,
-textarea {
+select
+{
     max-width: 300px;
+}
+
+textarea {
+    600px;
+}
+
+label {
+    text-align:right;
+    padding-top:6px;
 }
 
 footer {
@@ -79,8 +90,8 @@ th {
 nav ul li:hover {
     
     color: snow;
-    /*background-color: rgba(112,128,144,0.7);*/
-    background-color:#80cbc4;
+    background-color: rgba(112,128,144,0.7);
+    /*background-color:#80cbc4;*/
     /*background-color: #d5e1ed;*/
         -webkit-transition: background-color 300ms linear;
         -moz-transition: background-color 300ms linear;
@@ -103,6 +114,33 @@ nav ul li {
 
 nav ul li ul li {
     height:auto;
+}
+
+.nav.navbar-nav.navbar-right img {
+    height: 53px;
+}
+
+.navbar-right .img-thumbnail:not([src$=".jpg"]):not([src$=".jpeg"]):not([src$=".png"]) {
+    visibility: hidden;
+}
+
+.nav.navbar-nav.navbar-right .img-thumbnail {
+    opacity: 0.85;
+}
+
+.nav.navbar-nav.navbar-right .img-thumbnail:hover {
+    -webkit-box-shadow: inset 0px 0px 20px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 20px -2px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 20px -2px rgba(0,0,0,0.75);
+    opacity: 1;
+    -webkit-transition: opacity 300ms linear;
+        -moz-transition: opacity 300ms linear;
+        -o-transition: opacity 300ms linear;
+        -ms-transition: opacity 300ms linear;
+        transition: opacity 300ms linear;
+}
+.collapse.navbar-collapse.navbar-left {
+    width: calc( 100% - 48px );
 }
 
 #border {
@@ -335,3 +373,4 @@ footer {
     height: 100%;
     background-color: #ffffff;
 }
+

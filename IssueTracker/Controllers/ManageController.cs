@@ -16,6 +16,7 @@ namespace IssueTracker.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -98,7 +99,7 @@ namespace IssueTracker.Controllers
                     var putanjaFoldera = Server.MapPath(@"~\ProfilneSlike");
 
                     profileViewModel.UploadedImage.SaveAs(Path.Combine(putanjaFoldera, profileViewModel.Id + extension));
-                    trenutnoUlogovaniKorisnik.Fotografija = Path.Combine(putanjaFoldera, profileViewModel.Id + extension);
+                    trenutnoUlogovaniKorisnik.Fotografija = Path.Combine(profileViewModel.Id + extension);
                 }
                 var result2 = await UserManager.UpdateAsync(trenutnoUlogovaniKorisnik);
                 if (result2.Succeeded)
@@ -109,10 +110,54 @@ namespace IssueTracker.Controllers
             return View(profileViewModel);
         }
 
-        public JsonResult VratiJson()
+
+        public JsonResult Statistika(string parametar)
         {
-            return Json(new { Ime = "Milica", Prezime = "Stef" }, JsonRequestBehavior.AllowGet);
+            if (string.IsNullOrEmpty(parametar))
+            {
+                throw new ArgumentNullException(nameof(parametar));
+            }
+            string uslov = parametar.ToUpper().Trim();
+            
+            switch (uslov)
+            {
+                case "KORISNICI":
+
+                    var listaKorisnika = UserManager.Users.Select(u =>
+            new
+            {
+                Ime = u.Ime,
+                BrojProblema = u.DodeljeniProblemi.Count,
+                Uloga = "Sluzbenik",
+                Fotografija = "~/Content/" + u.Fotografija
+            }
+            ).ToList();
+                    return Json(listaKorisnika, JsonRequestBehavior.AllowGet);
+                    
+                case "PROBLEMI":
+
+                    var listaProblema = db.Problemi.ToList().Select(p =>
+            new
+            {
+                VrstaProblemaId = p.VrstaProblemaID,
+                DatumKreiranja = p.DatumKreiranja.ToString("dd/MM/yyyy"),
+                Status = p.Status
+            }
+            );
+                    return Json(listaProblema, JsonRequestBehavior.AllowGet);
+                    
+                default:
+                    break;
+            }
+            //var trenutniKorisnikId = User.Identity.GetUserId();
+
+
+            return null;
+            
         }
+
+
+
 
         //
         // POST: /Manage/RemoveLogin

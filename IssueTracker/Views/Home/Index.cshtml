@@ -1,23 +1,35 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@using System.IdentityModel;
+@using System.IdentityModel.Claims;
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using IssueTracker.Models
+@model IssueTracker.Models.HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
+
+
 <div class="loadingscreen"> <div class="loader"></div> </div>
 <div class="jumbotron">
-    <h1>Dobrodošli, @User.Identity.Name.ToString()</h1>
+    <h1>Dobrodošli, @Model.ImePrezime</h1>
     <p>
         Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
-        Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu.
+        Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu, trenutno imate aktivnih @Model.BrojProblemaTrenutnoUlogovanogKorisnika 
+        problema.
     </p>
     
     <br />
-    <p><a href="http://asp.net" class="btn btn-primary btn-group-lg">Današnji zadaci &raquo;</a></p>
+    <p><a href="#" class="btn btn-primary btn-group-lg">Današnji zadaci &raquo;</a></p>
+    @Html.ActionLink("Danasnji zadaci", "Index" ,"Problems", new { korisnikId = User.Identity.GetUserId() }, new { @class = "btn btn-default" })
 </div>
 <div class="row">
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="~/imgs/photo-1461749280684-dccba630e2f6.jpg" alt="...">
-            
             <div class="caption">
                 <h3>Kako koristiti ovu aplikaciju?</h3>
                 <p>
@@ -26,7 +38,8 @@
                     markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast,
                     TDD-friendly development for creating sophisticated applications that use the latest web standards.
                 </p>
-                <a href="#" class="btn btn-default" role="button">Više &raquo;</a>
+                <a href="#" class="waves-effect waves-light btn">Više &raquo;</a>
+                <a class="waves-effect waves-light btn">button</a>
             </div>
         </div>
     </div>
@@ -42,7 +55,8 @@
                     dovoljno slika na kojima je ovca, posle izvesnog vremena,
                     on će početi i samostalno da ih prepoznaje.
                 </p>
-                <a href="#" class="btn btn-default" role="button">Više &raquo;</a>
+                <a href="#" class="waves-effect waves-light btn">Više &raquo;</a>
+                
             </div>
         </div>
     </div>
@@ -60,20 +74,8 @@
                     Suspendisse in erat urna. Cum sociis natoque penatibus et magnis dis parturient montes,
                     nascetur ridiculus mus.
                 </p>
-                <a href="#" class="btn btn-default" role="button">Više &raquo;</a>
+                <a href="#" class="waves-effect waves-light btn">Više &raquo;</a>
             </div>
         </div>
     </div>
 </div>
-
-@*<div class="col-md-4">
-        <h2>Najnovija vest!</h2>
-        <div class="media-object col-md-3"><img src="https://hd.unsplash.com/photo-1461749280684-dccba630e2f6" alt="Nema fotke" /></div>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>*@
-@*<div class="col-md-4">
-        <h2>Članak 2</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>*@

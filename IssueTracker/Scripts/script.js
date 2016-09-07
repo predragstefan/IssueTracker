@@ -16,7 +16,7 @@ $(".naziv, .datum-kreiranja, .status-sort").one("click", function () {
 });
 
 $(window).on("load", function () {
-    setTimeout(loading, 2000);
+    setTimeout(loading, 1000);
     function loading() {
         $(".loadingscreen").fadeOut();
     }

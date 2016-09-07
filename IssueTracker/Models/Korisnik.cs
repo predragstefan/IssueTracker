@@ -29,9 +29,10 @@ namespace IssueTracker.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            userIdentity.AddClaim(new Claim("Fotografija", this.Fotografija));
             return userIdentity;
         }
+
+
         [InverseProperty("Kreirao")]
         public List<Problem> KreiraniProblemi { get; set; }
         //public List<Problem> PromenjeniProblemi { get; set; }

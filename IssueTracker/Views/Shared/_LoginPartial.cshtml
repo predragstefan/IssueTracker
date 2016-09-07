@@ -9,11 +9,7 @@
     {
         
     @Html.AntiForgeryToken()
-
-
         <ul class="nav navbar-nav navbar-right">
-            <li> <img src=fotka alt="Alternate Text" /> </li>
-
             <li>
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>

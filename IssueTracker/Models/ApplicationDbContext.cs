@@ -13,8 +13,11 @@ namespace IssueTracker.Models
         public DbSet<Problem> Problemi { get; set; }
         //dodaj isto ovo kao gore za vrstu problema
         public DbSet<VrstaProblema> VrsteProblema { get; set; }
-        //public DbSet<ProblemKorisnik> ProblemKorisniks { get; set; }
+        
         public DbSet<IstorijaProblema> IstorijeProblema { get; set; }
+
+        
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

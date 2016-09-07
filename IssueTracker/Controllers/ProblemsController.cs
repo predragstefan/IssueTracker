@@ -27,8 +27,9 @@ namespace IssueTracker.Controllers
         //    return View(problems.ToList());
         //}
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string korisnikId, string sortOrder = null, string currentFilter=null, string searchString=null, int? page=1)
         {
+            ViewBag.TrenutniKorisnikId = korisnikId;
             ViewBag.CurrentSort = sortOrder;
             ViewBag.VrstaSortParm = sortOrder == "Vrsta" ? "vrsta_desc" : "Vrsta";
             ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
@@ -45,7 +46,7 @@ namespace IssueTracker.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var problemi = from p in db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio)
+            var problemi = from p in db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio).Include(p => p.DodeljenoKorisniku)
                            select p;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -53,6 +54,11 @@ namespace IssueTracker.Controllers
                 problemi = problemi.Where(p => p.Naziv.Contains(searchString)
                                         || p.VrstaProblema.Naziv.Contains(searchString)
                                         || p.Status.ToString().Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(korisnikId))
+            {
+                problemi = problemi.Where(p => p.DodeljenoKorisnikuId == korisnikId);
             }
             switch (sortOrder)
             {
@@ -105,6 +111,7 @@ namespace IssueTracker.Controllers
         public ActionResult Create()
         {
             ViewBag.VrstaProblemaID = new SelectList(db.VrsteProblema, "VrstaProblemaID", "Naziv");
+            ViewBag.DodeljenoKorisnikuId = new SelectList(db.Users, "Id", "ImePrezime");
             return View();
         }
 
@@ -121,12 +128,14 @@ namespace IssueTracker.Controllers
                 problem.Status = Status.Otvoren;
                 var userID = User.Identity.GetUserId();
                 problem.KreiraoId = userID;
+                
                 db.Problemi.Add(problem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.VrstaProblemaID = new SelectList(db.VrsteProblema, "VrstaProblemaID", "Naziv", problem.VrstaProblemaID);
+            ViewBag.DodeljenoKorisniku = new SelectList(db.Users, "Id", "ImePrezime", problem.Id);
             return View(problem);
         }
 
@@ -143,6 +152,7 @@ namespace IssueTracker.Controllers
                 return HttpNotFound();
             }
             ViewBag.VrstaProblemaID = new SelectList(db.VrsteProblema, "VrstaProblemaID", "Naziv", problem.VrstaProblemaID);
+            ViewBag.DodeljenoKorisnikuId = new SelectList(db.Users, "Id", "ImePrezime");
             return View(problem);
         }
 
@@ -176,6 +186,7 @@ namespace IssueTracker.Controllers
                 postojeciProblem.Opis = problem.Opis;
                 postojeciProblem.Status = problem.Status;
                 postojeciProblem.VrstaProblemaID = problem.VrstaProblemaID;
+                postojeciProblem.DodeljenoKorisnikuId = problem.DodeljenoKorisnikuId;
                 var userID = User.Identity.GetUserId();
                 postojeciProblem.PoslednjiIzmenioId = userID;
                 //db.Entry(problem).State = EntityState.Modified;
@@ -183,6 +194,7 @@ namespace IssueTracker.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.VrstaProblemaID = new SelectList(db.VrsteProblema, "VrstaProblemaID", "Naziv", problem.VrstaProblemaID);
+            ViewBag.DodeljenoKorisnikuId = new SelectList(db.Users, "Id", "ImePrezime");
             return View(problem);
         }
 
