@@ -11,20 +11,30 @@
     ViewBag.Title = "Home Page";
 }
 
-
-
-<div class="loadingscreen"> <div class="loader"></div> </div>
+<div class="loadingscreen"> <div class="loader-wrapper"><div class="loader"></div><span class="load-text">Loading...</span></div> </div>
 <div class="jumbotron">
-    <h1>Dobrodošli, @Model.ImePrezime</h1>
-    <p>
-        Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
-        Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu, trenutno imate aktivnih @Model.BrojProblemaTrenutnoUlogovanogKorisnika 
-        problema.
-    </p>
-    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2>Dobrodošli,</h2>
+        <h1>@Model.ImePrezime</h1>
+        <hr/>
+        <p>
+            Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
+            Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu, trenutno imate aktivnih @Model.BrojProblemaTrenutnoUlogovanogKorisnika
+            problema.
+        </p>
+    }
+    else
+    {
+        <h1>Dobrodošli</h1>
+        <hr/>
+        <p>
+            Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
+            Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu, za nastavak sa radom ulogujte se.
+        </p>
+    }
     <br />
-    <p><a href="#" class="btn btn-primary btn-group-lg">Današnji zadaci &raquo;</a></p>
-    @Html.ActionLink("Danasnji zadaci", "Index" ,"Problems", new { korisnikId = User.Identity.GetUserId() }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Današnji zadaci »", "Index", "Problems", new { korisnikId = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
 </div>
 <div class="row">
     <div class="col-sm-6 col-md-4">
@@ -38,15 +48,14 @@
                     markup for enjoyable, agile development. ASP.NET MVC includes many features that enable fast,
                     TDD-friendly development for creating sophisticated applications that use the latest web standards.
                 </p>
-                <a href="#" class="waves-effect waves-light btn">Više &raquo;</a>
-                <a class="waves-effect waves-light btn">button</a>
+                <a href="#" class="btn btn-default">Više &raquo;</a>
             </div>
         </div>
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="~/imgs/photo-1470311500468-0179201f7499.jpg" alt="...">
-            
+
             <div class="caption">
                 <h3>Najnovija vest</h3>
                 <p>
@@ -55,15 +64,15 @@
                     dovoljno slika na kojima je ovca, posle izvesnog vremena,
                     on će početi i samostalno da ih prepoznaje.
                 </p>
-                <a href="#" class="waves-effect waves-light btn">Više &raquo;</a>
-                
+                <a href="#" class="btn btn-default">Više &raquo;</a>
+
             </div>
         </div>
     </div>
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <img src="~/imgs/photo-1434493789847-2f02dc6ca35d.jpg" alt="...">
-            
+
             <div class="caption">
                 <h3>Najnovija vest</h3>
                 <p>
@@ -74,7 +83,7 @@
                     Suspendisse in erat urna. Cum sociis natoque penatibus et magnis dis parturient montes,
                     nascetur ridiculus mus.
                 </p>
-                <a href="#" class="waves-effect waves-light btn">Više &raquo;</a>
+                <a href="#" class="btn btn-default">Više &raquo;</a>
             </div>
         </div>
     </div>

@@ -136,7 +136,7 @@ namespace IssueTracker.Controllers
                     
                 case "PROBLEMI":
 
-                    var listaProblema = db.Problemi.ToList().Select(p =>
+                    var listaProblema = db.Problemi.ToList().OrderBy(p => p.DatumKreiranja).Select(p =>
             new
             {
                 VrstaProblemaId = p.VrstaProblemaID,
