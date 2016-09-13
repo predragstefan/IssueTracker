@@ -134,7 +134,7 @@ namespace IssueTracker.Controllers
                 Id = u.Id,
                 Ime = u.Ime,
                 BrojProblema = u.DodeljeniProblemi.Count,
-                Uloga = "Nesto",
+                Uloga = "Službenik",
                 Fotografija = "/ProfilneSlike/" + u.Fotografija
             }
             ).ToList();

@@ -1,28 +1,32 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "O nama";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
-
+<hr />
 <div class="row">
-
     <div class="row">
-        <div class="col-md-6"><div id="map"></div></div>
+        <div class="col-md-12"><div id="map" class="mapgoogle"></div></div>
     </div>
-    <div class="col-md-7">
-        <div class="thumbnail">
-            <img src="~/imgs/95cdfeef.jpg" alt="...">
-            <div class="caption">
-                <h3>O nama</h3>
-                <p>
-                    Mi smo Miljana Mikic, Stefan Trbojevic i Predrag Stefanovic. :)
-                    Studenti ISiT smeta Fakulteta organizacionih nauka. Volimo IT
-                    i volimo FON.
-                </p>
-                <a href="#" class="btn btn-default">Više &raquo;</a>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <img src="~/imgs/photo-1457904375453-3e1fc2fc76f4.jpg" alt="...">
+                <div class="caption">
+                    <h2>O nama</h2>
+                    <p>
+                        Mi smo Miljana Mikic, Stefan Trbojevic i Predrag Stefanovic. :)
+                        Studenti ISiT smeta Fakulteta organizacionih nauka. Volimo IT
+                        i volimo FON. Napravili smo ovu aplikaciju u ASP .NET platformi, 
+                        uz Pomoc Entity Framework 6, Javascript, d3.js jQuery i Bootstrap-a.
+                        Bilo nam je zanimljivo.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<hr />
+<h3>@ViewBag.Message</h3>

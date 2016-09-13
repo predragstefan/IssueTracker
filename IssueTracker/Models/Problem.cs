@@ -17,10 +17,10 @@ namespace IssueTracker.Models
 
         public string Opis { get; set; }
 
-        [Display(Name = "Datum Kreiranja")]
+        [Display(Name = "Datum kreiranja")]
         public DateTime DatumKreiranja { get; set; }
 
-        [Display(Name = "Vreme poslednje Izmene")]
+        [Display(Name = "Vreme poslednje izmene")]
         public DateTime? VremePoslednjeIzmene { get; set; }
 
         [InverseProperty("KreiraniProblemi")]
@@ -28,7 +28,7 @@ namespace IssueTracker.Models
 
         public string KreiraoId { get; set; }
 
-        [Display(Name = "Poslednji Izmenio")]
+        [Display(Name = "Poslednji izmenio")]
         public Korisnik PoslednjiIzmenio { get; set; }
 
         public string PoslednjiIzmenioId { get; set; }
@@ -38,6 +38,7 @@ namespace IssueTracker.Models
 
         public int VrstaProblemaID { get; set; }
 
+        [Display(Name ="Dodeljeno službeniku")]
         public Korisnik DodeljenoKorisniku { get; set; }
         public string DodeljenoKorisnikuId { get; set; }
     }

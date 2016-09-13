@@ -46,7 +46,7 @@ namespace IssueTracker.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Designed by Pekara. All rights reserved.";
+            ViewBag.Message = "Designed by Peki. All rights reserved.";
 
             return View();
         }
