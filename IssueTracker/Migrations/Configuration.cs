@@ -4,7 +4,6 @@ namespace IssueTracker.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -19,7 +18,7 @@ namespace IssueTracker.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data. E.g.
             //
             //    context.People.AddOrUpdate(
@@ -37,7 +36,7 @@ namespace IssueTracker.Migrations
             {
                 var store = new UserStore<Korisnik>(context);
                 var manager = new UserManager<Korisnik>(store);
-                var user = new Korisnik { UserName = "peki", Ime="Peki", Prezime="Stefanovic" };
+                var user = new Korisnik { UserName = "peki", Ime = "Peki", Prezime = "Stefanovic" };
 
                 manager.Create(user, "ChangeItAsap!");
                 manager.AddToRole(user.Id, "Administrator");

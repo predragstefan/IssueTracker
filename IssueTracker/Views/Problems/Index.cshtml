@@ -31,9 +31,6 @@
         <div class="nav navbar-default navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="navbar-form navbar-left">
                 <div class="nav navbar-nav">
-                    @*<li>
-                        <button class="btn btn-default">@Html.ActionLink("Kreirajte novi", "Create")</button> 
-                </li>*@
                     @using (Html.BeginForm("Create", "Problems", FormMethod.Get))
                     {
                         <button type="submit" class="btn btn-default">Kreiraj</button>
@@ -45,17 +42,18 @@
                 @using (Html.BeginForm("Index", "Problems", FormMethod.Get))
                 {
                     <div class="form-group">
+                        Filtriraj za mene: @Html.CheckBox("templateId", new { value = ViewBag.TrenutniKorisnik, @checked = false })
                         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control input-search", placeholder = "Unesite vrstu, naziv ili status..." })
                     </div>
-                    <button type="submit" value="Search" class="btn btn-default">Pretraži</button>
+                    <button type="submit" value="Search" class="btn btn-primary">Pretraži</button>
                 }
             </form>
         </div>
     </div>
 </nav>
-    <table class="table table-striped table-bordered table-hover table-curved table-responsive table-condensed" id="index-tabela">
+    <table class="table table-striped table-hover table-bordered table-responsive table-condensed" id="index-tabela">
         <tr>
-            
+
             <th class="vrsta">
                 @Html.ActionLink("Vrsta problema", "Index", new { sortOrder = ViewBag.VrstaSortParm, currentFilter = ViewBag.CurrentFilter, korisnikId = ViewBag.TrenutniKorisnikId }) <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
             </th>

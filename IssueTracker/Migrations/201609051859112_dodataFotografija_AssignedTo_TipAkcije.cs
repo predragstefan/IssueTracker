@@ -1,8 +1,7 @@
 namespace IssueTracker.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class dodataFotografija_AssignedTo_TipAkcije : DbMigration
     {
         public override void Up()
@@ -13,7 +12,7 @@ namespace IssueTracker.Migrations
             CreateIndex("dbo.Problems", "DodeljenoKorisnikuId");
             AddForeignKey("dbo.Problems", "DodeljenoKorisnikuId", "dbo.AspNetUsers", "Id");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Problems", "DodeljenoKorisnikuId", "dbo.AspNetUsers");

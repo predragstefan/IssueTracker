@@ -1,13 +1,13 @@
-﻿using System;
+﻿using IssueTracker.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using IssueTracker.Models;
-using System.IO;
 
 namespace IssueTracker.Controllers
 {
@@ -28,15 +28,21 @@ namespace IssueTracker.Controllers
             SignInManager = signInManager;
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
+
         public ApplicationSignInManager SignInManager
         {
             get
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -65,14 +71,14 @@ namespace IssueTracker.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-
-
             var userId = User.Identity.GetUserId();
             var user = UserManager.FindById(userId);
+
             var model = new IndexViewModel
             {
                 Id = userId,
                 Ime = user.Ime,
+                Email = user.Email,
                 Prezime = user.Prezime,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
@@ -102,14 +108,13 @@ namespace IssueTracker.Controllers
                     trenutnoUlogovaniKorisnik.Fotografija = Path.Combine(profileViewModel.Id + extension);
                 }
                 var result2 = await UserManager.UpdateAsync(trenutnoUlogovaniKorisnik);
-                if (result2.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                //if (result2.Succeeded)
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
             }
             return View(profileViewModel);
         }
-
 
         public JsonResult Statistika(string parametar)
         {
@@ -118,7 +123,7 @@ namespace IssueTracker.Controllers
                 throw new ArgumentNullException(nameof(parametar));
             }
             string uslov = parametar.ToUpper().Trim();
-            
+
             switch (uslov)
             {
                 case "KORISNICI":
@@ -126,38 +131,43 @@ namespace IssueTracker.Controllers
                     var listaKorisnika = UserManager.Users.Select(u =>
             new
             {
+                Id = u.Id,
                 Ime = u.Ime,
                 BrojProblema = u.DodeljeniProblemi.Count,
-                Uloga = "Sluzbenik",
-                Fotografija = "~/Content/" + u.Fotografija
+                Uloga = "Nesto",
+                Fotografija = "/ProfilneSlike/" + u.Fotografija
             }
             ).ToList();
+
                     return Json(listaKorisnika, JsonRequestBehavior.AllowGet);
-                    
+
                 case "PROBLEMI":
 
                     var listaProblema = db.Problemi.ToList().OrderBy(p => p.DatumKreiranja).Select(p =>
             new
             {
+                SifraProblema = p.Id,
                 VrstaProblemaId = p.VrstaProblemaID,
                 DatumKreiranja = p.DatumKreiranja.ToString("dd/MM/yyyy"),
-                Status = p.Status
+                Status = p.Status.ToString()
             }
             );
+                    //var problemi = from p in db.Problemi.Include(p => p.VrstaProblema)
+                    //               select p;
+
+                    //var jsonProblemi = JsonConvert.SerializeObject(problemi, Formatting.Indented, new JsonSerializerSettings
+                    //{ ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+
+                    //return jsonProblemi;
                     return Json(listaProblema, JsonRequestBehavior.AllowGet);
-                    
+
                 default:
                     break;
             }
             //var trenutniKorisnikId = User.Identity.GetUserId();
 
-
             return null;
-            
         }
-
-
-
 
         //
         // POST: /Manage/RemoveLogin
@@ -417,7 +427,8 @@ namespace IssueTracker.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -468,6 +479,6 @@ namespace IssueTracker.Controllers
             Error
         }
 
-#endregion
+        #endregion Helpers
     }
 }

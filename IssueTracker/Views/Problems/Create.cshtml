@@ -1,61 +1,77 @@
-﻿    @model IssueTracker.Models.Problem
+﻿@model IssueTracker.Models.Problem
 
 @{
     ViewBag.Title = "Kreiraj";
 }
 
 <h2>Kreiraj novi problem</h2>
+<hr />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        <div class="well">
-            <br />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Naziv, "Unesite naziv:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Naziv, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well">
+                <fieldset>
+                    <legend>Unesite podatke za nov problem</legend>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="input-group input-group">
+                                    <span class="input-group-addon" id="sizing-addon1">Unesite naziv:</span>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Opis, "Unesite opis:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Opis, htmlAttributes: new { @class = "text-area" })
-                    @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.VrstaProblemaID, "Izaberite vrstu:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("VrstaProblemaID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.VrstaProblemaID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.DodeljenoKorisnikuId ,"Dodelite sluzbeniku:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("DodeljenoKorisnikuId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.DodeljenoKorisnikuId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+                                    @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control", placeholder = "Naziv problema" }, type = "text" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Opis, "Unesite opis:", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Opis, htmlAttributes: new { @class = "text-area" })
+                                @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.VrstaProblemaID, "Izaberite vrstu:", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("VrstaProblemaID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.VrstaProblemaID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.DodeljenoKorisnikuId, "Dodelite sluzbeniku:", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("DodeljenoKorisnikuId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DodeljenoKorisnikuId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 text-right">
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <input type="submit" value="Kreiraj" class="btn btn-success" />
+                                    @Html.ActionLink("Vratite se", "Index", null, new { @class = "btn btn-default" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
         </div>
     </div>
-}
-@using (Html.BeginForm("Index", "Problems"))
-{
-    <button type="submit" class="btn btn-default">Nazad</button>
 }
 
 @section Scripts {

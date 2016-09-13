@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -11,12 +9,11 @@ namespace IssueTracker.Models
     public class ApplicationDbContext : IdentityDbContext<Korisnik>
     {
         public DbSet<Problem> Problemi { get; set; }
+
         //dodaj isto ovo kao gore za vrstu problema
         public DbSet<VrstaProblema> VrsteProblema { get; set; }
-        
-        public DbSet<IstorijaProblema> IstorijeProblema { get; set; }
 
-        
+        public DbSet<IstorijaProblema> IstorijeProblema { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -54,7 +51,6 @@ namespace IssueTracker.Models
 
         public override Task<int> SaveChangesAsync()
         {
-
             try
             {
                 return base.SaveChangesAsync();
@@ -76,6 +72,5 @@ namespace IssueTracker.Models
                 throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
             }
         }
-
     }
 }

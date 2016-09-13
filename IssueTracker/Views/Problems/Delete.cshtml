@@ -2,71 +2,110 @@
 
 @{
     ViewBag.Title = "Delete";
+
 }
 
-<h2>Delete</h2>
+<h2>Brisanje problema</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Problem</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.VrstaProblema.Naziv)
-        </dt>
+<h4>Da li ste sigurni da želite da obrišete ovaj problem?</h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.VrstaProblema.Naziv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DatumKreiranja)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DatumKreiranja)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kreirao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kreirao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VremePoslednjeIzmene)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VremePoslednjeIzmene)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PoslednjiIzmenio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PoslednjiIzmenio)
-        </dd>
-    </dl>
-</div>
 <hr />
-<div class="btn-group" role="group" aria-label="...">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @*<div class="form-actions no-color">*@
-        <input type="submit" value="Delete" class="btn btn-default btn-danger" />
-            <div class="btn btn-default">@Html.ActionLink("Back to List", "Index")</div>
-            @*</div>*@
-    }
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <fieldset>
+                <legend>Osnovni podaci</legend>
+                <div class="row">
+                    @*@Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "label-info col-md-1" })*@
+                    <div class="col-md-12">
+                        <div class="input-group input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Naziv:</span>
+
+                            @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control", placeholder = Model.Naziv }, type = "text" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    @*@Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "label-info col-md-1" })*@
+                    <div class="col-md-12">
+                        <div class="input-group input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Vrsta problema:</span>
+
+                            @Html.EditorFor(model => model.VrstaProblema.Naziv, new { htmlAttributes = new { @class = "form-control", placeholder = Model.VrstaProblema.Naziv }, type = "text" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    @*@Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "label-info col-md-1" })*@
+                    <div class="col-md-12">
+                        <div class="input-group input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Datum kreiranja:</span>
+
+                            @Html.EditorFor(model => model.DatumKreiranja, new { htmlAttributes = new { @class = "form-control", placeholder = Model.DatumKreiranja }, type = "text" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    @*@Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "label-info col-md-1" })*@
+                    <div class="col-md-12">
+                        <div class="input-group input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Kreirao:</span>
+                            @if (Model.Kreirao != null)
+                            {
+                                @Html.LabelFor(model => model.Kreirao.ImePrezime, new { htmlAttributes = new { @class = "form-control-static", placeholder = Model.Kreirao.ImePrezime }, type = "text" })
+                            }
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    @*@Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "label-info col-md-1" })*@
+                    <div class="col-md-12">
+                        <div class="input-group input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Vreme poslednje izmene:</span>
+
+                            @Html.EditorFor(model => model.VremePoslednjeIzmene, new
+                       { htmlAttributes = new { @class = "form-control", placeholder = Model.VremePoslednjeIzmene }, type = "text" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    @*@Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "label-info col-md-1" })*@
+                    <div class="col-md-12">
+                        <div class="input-group input-group">
+                            <span class="input-group-addon" id="sizing-addon1">Poslednji izmenio:</span>
+                            @if (Model.PoslednjiIzmenio != null)
+                            {
+                                @Html.EditorFor(model => model.PoslednjiIzmenio.ImePrezime, new { htmlAttributes = new { @class = "form-control", placeholder = Model.PoslednjiIzmenio.ImePrezime }, type = "text" })
+                            }
+                        </div>
+                    </div>
+                </div>
+                <br />
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
+
+                    @*<div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default btn-danger" />
+                            <div class="btn btn-default">@Html.ActionLink("Back to List", "Index")</div>
+                        </div>*@
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                @Html.ActionLink("Vratite se", "Index", null, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </fieldset>
+        </div>
+    </div>
 </div>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace IssueTracker.Models
 {
@@ -10,6 +7,7 @@ namespace IssueTracker.Models
     {
         public int Id { get; set; }
         public int ProblemID { get; set; }
+
         [Required]
         [MaxLength(255)]
         public string Naziv { get; set; }
@@ -25,8 +23,7 @@ namespace IssueTracker.Models
         public Status Status { get; set; }
 
         public TipAkcije Akcija { get; set; }
-
     }
 
-    public enum TipAkcije { Edit, Delete}
+    public enum TipAkcije { Edit, Delete }
 }

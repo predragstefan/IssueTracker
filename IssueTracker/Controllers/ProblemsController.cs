@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IssueTracker.Models;
+using Microsoft.AspNet.Identity;
+using PagedList;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IssueTracker.Models;
-using Microsoft.AspNet.Identity;
-using System.Web.UI.WebControls;
-using PagedList;
 
 namespace IssueTracker.Controllers
 {
-    
-    [Authorize(Roles ="Sluzbenik, Administrator")]
+    [Authorize(Roles = "Sluzbenik, Administrator")]
     public class ProblemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Problems
-        //ORIGINAL 
+        //ORIGINAL
         //public ActionResult Index()
         //{
         //    var problems = db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio);
         //    return View(problems.ToList());
         //}
 
-        public ActionResult Index(string korisnikId, string sortOrder = null, string currentFilter=null, string searchString=null, int? page=1)
+        public ActionResult Index(string korisnikId, string sortOrder = null,
+            string currentFilter = null, string searchString = null, int? page = 1)
         {
             ViewBag.TrenutniKorisnikId = korisnikId;
             ViewBag.CurrentSort = sortOrder;
@@ -35,7 +32,7 @@ namespace IssueTracker.Controllers
             ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
-            if (searchString!=null)
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -65,21 +62,27 @@ namespace IssueTracker.Controllers
                 case "Vrsta":
                     problemi = problemi.OrderBy(p => p.VrstaProblema.Naziv);
                     break;
+
                 case "vrsta_desc":
                     problemi = problemi.OrderByDescending(p => p.VrstaProblema.Naziv);
                     break;
+
                 case "Date":
                     problemi = problemi.OrderBy(p => p.DatumKreiranja);
                     break;
+
                 case "date_desc":
                     problemi = problemi.OrderByDescending(p => p.DatumKreiranja);
                     break;
+
                 case "Status":
                     problemi = problemi.OrderBy(p => p.Status);
                     break;
+
                 case "status_desc":
                     problemi = problemi.OrderByDescending(p => p.Status);
                     break;
+
                 default:
                     problemi = problemi.OrderBy(p => p.Id);
                     break;
@@ -98,8 +101,8 @@ namespace IssueTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Problem problem = db.Problemi.Where(p => p.Id == id.Value).Include(p => p.VrstaProblema).Include(p=>p.Kreirao).Include(p=>p.PoslednjiIzmenio).SingleOrDefault();
-            
+            Problem problem = db.Problemi.Where(p => p.Id == id.Value).Include(p => p.VrstaProblema).Include(p => p.Kreirao).Include(p => p.PoslednjiIzmenio).SingleOrDefault();
+
             if (problem == null)
             {
                 return HttpNotFound();
@@ -116,7 +119,7 @@ namespace IssueTracker.Controllers
         }
 
         // POST: Problems/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -128,7 +131,7 @@ namespace IssueTracker.Controllers
                 problem.Status = Status.Otvoren;
                 var userID = User.Identity.GetUserId();
                 problem.KreiraoId = userID;
-                
+
                 db.Problemi.Add(problem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -157,7 +160,7 @@ namespace IssueTracker.Controllers
         }
 
         // POST: Problems/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -205,7 +208,11 @@ namespace IssueTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Problem problem = db.Problemi.Find(id);
+            Problem problem = db.Problemi.Include(p => p.VrstaProblema).Include(p => p.Kreirao).
+                Include(p => p.PoslednjiIzmenio).
+                Include(p => p.DodeljenoKorisniku).
+                Where(p => p.Id == id).SingleOrDefault();
+
             if (problem == null)
             {
                 return HttpNotFound();
@@ -214,6 +221,8 @@ namespace IssueTracker.Controllers
         }
 
         // POST: Problems/Delete/5
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

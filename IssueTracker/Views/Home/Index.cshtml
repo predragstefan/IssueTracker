@@ -5,6 +5,7 @@
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.EntityFramework
 @using IssueTracker.Models
+
 @model IssueTracker.Models.HomeViewModel
 
 @{
@@ -17,7 +18,6 @@
     {
         <h2>Dobrodošli,</h2>
         <h1>@Model.ImePrezime</h1>
-        <hr/>
         <p>
             Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
             Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu, trenutno imate aktivnih @Model.BrojProblemaTrenutnoUlogovanogKorisnika
@@ -27,7 +27,6 @@
     else
     {
         <h1>Dobrodošli</h1>
-        <hr/>
         <p>
             Dobar dan, danas je: @DateTime.UtcNow.ToShortDateString() <br />
             Vreme je @DateTime.UtcNow.ToShortTimeString() po centralnom vremenu, za nastavak sa radom ulogujte se.
@@ -65,7 +64,6 @@
                     on će početi i samostalno da ih prepoznaje.
                 </p>
                 <a href="#" class="btn btn-default">Više &raquo;</a>
-
             </div>
         </div>
     </div>

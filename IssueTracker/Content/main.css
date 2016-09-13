@@ -1,0 +1,236 @@
+#container{
+	display: inline-block;
+}
+#chart {
+	background-color: #f3f1f3;
+	border:1px solid #fefefe;
+}
+
+.bar {
+	fill: #607d8b;
+	shape-rendering: geometricPrecision;
+	-webkit-transition: fill 200ms ease-in;
+	transition: fill 200ms ease-in;
+}
+.bar:nth-child(odd){
+	fill: #b0bec5;
+}
+
+.bar-title {
+	text-anchor: middle;
+	font-size: 20px;
+	background-
+}
+
+.chart{
+	margin:5px;
+}
+.osa {
+	shape-rendering: geometricPrecision;
+	font-family: sans-serif;
+	font-size:15px;
+}
+.osa path, .osa line{
+fill:none;
+stroke:#000;
+shape-rendering: geometricPrecision;
+}
+
+.gridline path, .gridline line{
+	fill:none;
+	stroke:rgba(225,223,212,0.96);
+	shape-rendering: geometricPrecision;
+}
+
+.clear{
+	clear: both;
+}
+.bar:hover{
+	cursor:pointer;
+	fill: #546e7a !important;
+}
+
+#info{
+	display: none;
+	border-radius: 1px;
+	background: #263238;
+	padding:20px;
+	border:1px solid #37474f;
+	color: white;
+    font-size: 14px;
+}
+#line-info{
+	display: none;
+	border-radius: 1px;
+	background: #263238;
+	padding:20px;
+	border:1px solid #37474f;
+	color: white;
+    font-size: 14px;
+}
+
+#info.active, #line-info.active, #point-info.active {
+	display: block;
+	position:fixed;
+}
+
+#point-info{
+	display: none;
+	border-radius: 1px;
+	background: #263238;
+	padding:20px;
+	border:1px solid #37474f;
+	color: white;
+    font-size: 14px;
+}
+
+.x.osa > text, .y.osa > text{
+	font-weight: 300;
+}
+
+.line {
+	shape-rendering: geometricPrecision;
+	fill: none;
+	stroke-width:2px;
+	stroke:blue;
+	visibility: hidden;
+}
+
+.line.finished {
+	-webkit-transition: stroke-width .2s linear 5s;
+	transition: stroke-width .2s linear 5s;
+	stroke-width:1px;
+}
+
+.line.finished.line-data-enabled, .line.line-data-enabled{
+	-webkit-transition: stroke-width .2s linear .1s;
+	transition: stroke-width .2s linear .1s;
+	stroke-width:2px;
+}
+
+.line.finished:hover, .line.out:hover {
+	-webkit-transition:none;
+	transition: none;
+	cursor:pointer;
+}
+
+.point {
+	fill:rgba(0,255,255,0.9);
+	shape-rendering: geometricPrecision;
+}
+
+.point:hover {
+	cursor: pointer;
+}
+
+.visible.line{
+	visibility:visible;
+}
+
+.area{
+	stroke-width:1px;
+}
+.visible.area[id^='area']{
+	fill:rgba(0,0,255,0.3);
+}
+
+.area0{
+	fill: rgba(255, 23, 68, 0.3);
+}
+
+.area1{
+	fill: rgba(213, 0, 249, 0.3);
+}
+
+.area2{
+	fill:rgba(41, 121, 255, 0.3);
+}
+
+.area3{
+	fill: rgba(0, 229, 255, 0.3);
+}
+
+.area4{
+	fill: rgba(118, 255, 3, 0.3);
+}
+
+.filters .controls a {
+	text-decoration: none;
+	display: inline-block;
+	width:50%;
+	box-sizing: border-box;
+	text-align: center;
+	border:1px solid steelblue;
+	padding:10px 20px;
+	color:black;
+	background-color:#f1f1f1;
+	font-weight: 600;
+}
+
+.filters .controls a:first-child {
+	border-right:none;
+}
+
+.filters .controls a:hover {
+	background-color:silver;
+}
+
+.filters .controls a.active {
+	background-color:#fff;
+	border-bottom: none;
+	color:steelblue;
+	pointer-events: none;
+}
+
+.filters .filter {
+	display:none;
+	padding:30px 10px;
+	border:1px solid steelblue;
+	border-top:none;
+}
+
+.filters .filter.visible-filter {
+	display:block;
+}
+
+.filters{
+	float:right;
+	width:30%;
+	height: 100%;
+}
+
+.legend-item {
+	width:50px;
+	height:15px;
+	display: inline-block;
+}
+.legend-item + span{
+	font-size: 16px;
+}
+.legend-item + span:after {
+	content:' ';
+	display: block;
+}
+
+.all-problems {
+	background-color: #ff1744;
+}
+.logisticki {
+	background-color:#d500f9;
+}
+
+.sistemski {
+	background-color:#2979ff;
+}
+
+.administrativni {
+	background-color:#00e5ff;
+}
+
+.organizacioni {
+	background-color:#76ff03;
+}
+
+.legend {
+	padding:5px 0 30px 0;
+}

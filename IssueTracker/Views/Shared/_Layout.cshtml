@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    
+
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -30,11 +30,11 @@
             <div class="collapse navbar-collapse navbar-left" id="bs-example-navbar-collapse-2">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-                    {
-                        <li>@Html.ActionLink("Admin panel", "Statistika", "Manage")</li>
-                    }
-                    <li><a href="#">O nama</a></li>
+                    @*@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {*@
+                    <li>@Html.ActionLink("Admin panel", "AdminPanel", "Manage")</li>
+
+                    <li>@Html.ActionLink("O nama", "About", "Home")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Problem <span class="caret" aria-hidden="true"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -60,7 +60,6 @@
                 </ul>
             </div>
         </div>
-        
     </nav>
     <div class="container body-content">
         @RenderBody()
@@ -69,7 +68,7 @@
     <footer>
         <div class="container body-content">
             <hr />
-            <p>&copy; @DateTime.Now.Year - Made with <span class="glyphicon glyphicon-heart" aria-hidden="true" id="srce"></span> by Predrag, Miljana i Trba</p>
+            <p>&copy; @DateTime.Now.Year - Made with <span class="glyphicon glyphicon-heart" aria-hidden="true" id="srce"></span> by Predrag, Miljana i Trba <span class="glyphicon glyphicon-education" aria-hidden="true"></span> </p>
             <br />
             <br />
             <br />
@@ -79,9 +78,13 @@
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/script.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/d3.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/barchart.js"></script>
+    <script type="text/javascript" src="~/Scripts/linechart.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn-oR-xl6drETN9L2N-wD5y4i6dPKMtvY&v=3&callback=initMap"
+            async defer></script>
 </body>
 </html>

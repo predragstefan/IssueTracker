@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Admin panel";
+}
+<h2>Statistika trenutnih problema</h2>
+<hr />
+<div class="row">
+    <div class="well">
+        <div id="container">
+            <div id="info">
+                <img src="" height="58" width="79" alt="slika korisnika">
+                <div class="ime"></div>
+                <div class="user-problems"></div>
+                <div class="role"></div>
+            </div>
+            <div id="line-info">
+                <div class="problem-type"></div>
+            </div>
+            <div id="point-info">
+                <div class="problem-type"></div>
+                <div class="problem-date"></div>
+                <div class="problem-number"></div>
+            </div>
+        </div>
+        <div class="filters">
+            <div class="controls"><a href="#" class="showFilter active">Bar Charts</a><a href="#" class="showFilter">Line Charts</a></div>
+            <div class="filter-wrapper">
+                <div class="filter visible-filter">
+                    <label><input type="radio" name="filter" value="users" class='gen' checked> Show user stats</label><br><br>
+                    <label><input type="radio" name="filter" value="problems" class='gen2'> Show problem stats</label><br><br>
+                    <button class='sort btn btn-default'>Sort Asc</button>
+                </div>
+                <div class="filter">
+                    <div class="legend">
+                        <div class="all-problems legend-item"></div><span> All Problems</span>
+                        <div class="logisticki legend-item"></div><span> Tehnicki</span>
+                        <div class="sistemski legend-item"></div><span> Operativni</span>
+                        <div class="administrativni legend-item"></div><span> Sistemski</span>
+                        <div class="organizacioni legend-item"></div><span> Logisticki</span>
+                    </div>
+                    <button class='showLine btn btn-default'> Enable Line Data</button><br><br>
+                    <button class='showArea btn btn-default'> Disable Line Data</button><br><br>
+                    <div>
+                        <h4>Change Line Style</h4>
+                        <label><input type="radio" name="lineStyle" value="monotone" class='lineStyle' checked> Monotone</label><br>
+                        <label><input type="radio" name="lineStyle" value="step-before" class='lineStyle'>Step Before</label><br>
+                        <label><input type="radio" name="lineStyle" value="linear" class='lineStyle'> Linear</label><br><label><input type="radio" name="lineStyle" value="cardinal" class='lineStyle'> Cardinal</label><br>
+                        <input type="radio" name="lineStyle" value="bundle" class='lineStyle'> Bundle</label><br>
+                        <input type="radio" name="lineStyle" value="step-after" class='lineStyle'> Step After</label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

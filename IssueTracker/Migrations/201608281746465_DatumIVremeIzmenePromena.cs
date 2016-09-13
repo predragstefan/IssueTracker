@@ -1,8 +1,7 @@
 namespace IssueTracker.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class DatumIVremeIzmenePromena : DbMigration
     {
         public override void Up()
@@ -12,7 +11,7 @@ namespace IssueTracker.Migrations
             DropColumn("dbo.IstorijaProblemas", "DatumIzmene");
             DropColumn("dbo.Problems", "DatumIzmene");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Problems", "DatumIzmene", c => c.DateTime());

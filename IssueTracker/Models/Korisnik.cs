@@ -1,10 +1,10 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace IssueTracker.Models
 {
@@ -14,7 +14,7 @@ namespace IssueTracker.Models
         public string Ime { get; set; }
         public string Prezime { get; set; }
 
-        [Display(Name ="Ime i prezime")]
+        [Display(Name = "Ime i prezime")]
         public string ImePrezime
         {
             get
@@ -32,17 +32,17 @@ namespace IssueTracker.Models
             return userIdentity;
         }
 
-
         [InverseProperty("Kreirao")]
         public List<Problem> KreiraniProblemi { get; set; }
+
         //public List<Problem> PromenjeniProblemi { get; set; }
 
         [InverseProperty("DodeljenoKorisniku")]
         public List<Problem> DodeljeniProblemi { get; set; }
+
         public override string ToString()
         {
             return Ime + " " + Prezime;
         }
     }
-
 }
